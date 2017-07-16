@@ -106,7 +106,7 @@ module Restforce
     option :client_secret, default: lambda { ENV['SALESFORCE_CLIENT_SECRET'] }
 
     # Path to private key for JWT authentication
-    option :jwt_key
+    option :jwt_key, default: lambda { ENV['SALESFORCE_JWT_KEY'] }
 
     # Set this to true if you're authenticating with a Sandbox instance.
     # Defaults to false.
