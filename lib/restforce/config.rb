@@ -114,7 +114,7 @@ module Restforce
 
     option :oauth_token
     option :refresh_token
-    option :instance_url
+    option :instance_url, default: lambda { ENV['SALESFORCE_INSTANCE_URL'] }
 
     # Set this to an object that responds to read, write and fetch and all GET
     # requests will be cached.

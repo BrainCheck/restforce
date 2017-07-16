@@ -8,6 +8,8 @@ describe Restforce do
     ENV['SALESFORCE_CLIENT_ID']      = nil
     ENV['SALESFORCE_CLIENT_SECRET']  = nil
     ENV['SALESFORCE_API_VERSION']    = nil
+    ENV['SALESFORCE_INSTANCE_URL']   = nil
+    ENV['SALESFORCE_JWT_KEY']        = nil
   end
 
   after do
@@ -27,7 +29,8 @@ describe Restforce do
       its(:ssl)                    { should eq({}) }
       [:username, :password, :security_token, :client_id, :client_secret,
        :oauth_token, :refresh_token, :instance_url, :compress, :timeout,
-       :proxy_uri, :authentication_callback, :mashify, :request_headers].each do |attr|
+       :jwt_key, :proxy_uri, :authentication_callback, :mashify,
+       :request_headers].each do |attr|
         its(attr) { should be_nil }
       end
     end
@@ -41,6 +44,8 @@ describe Restforce do
           'SALESFORCE_CLIENT_SECRET'  => 'client secret',
           'SALESFORCE_PROXY_URI'      => 'proxy',
           'SALESFORCE_HOST'           => 'test.host.com',
+          'SALESFORCE_JWT_KEY'        => 'path/to/private/key',
+          'SALESFORCE_INSTANCE_URL'   => 'instance.host.com',
           'SALESFORCE_API_VERSION'    => '37.0' }.
         each { |var, value| ENV.stub(:[]).with(var).and_return(value) }
       end
@@ -53,6 +58,8 @@ describe Restforce do
       its(:proxy_uri)      { should eq 'proxy' }
       its(:host)           { should eq 'test.host.com' }
       its(:api_version)    { should eq '37.0' }
+      its(:instance_url)   { should eq 'instance.host.com' }
+      its(:jwt_key)        { should eq 'path/to/private/key' }
     end
   end
 
