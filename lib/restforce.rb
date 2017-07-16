@@ -1,6 +1,7 @@
 require 'faraday'
 require 'faraday_middleware'
 require 'json'
+require 'jwt'
 
 require 'restforce/version'
 require 'restforce/config'
